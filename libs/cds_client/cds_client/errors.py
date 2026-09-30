@@ -1,0 +1,4 @@
+
+
+class CdsError(Exception):
+    pass

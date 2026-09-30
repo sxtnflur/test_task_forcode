@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  docker-host:
+    image: qoomon/docker-host
+    cap_add: [ 'NET_ADMIN', 'NET_RAW' ]
+    restart: on-failure
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GITLAB_TOKEN_NAME: ${GITLAB_TOKEN_NAME}
+        GITLAB_TOKEN: ${GITLAB_TOKEN}
+    command: web
+    env_file: .env
+    ports:
+      - ${WEB_SERVICE_PORT}:${WEB_SERVICE_PORT}
+    volumes:
+      - ./:/opt/app

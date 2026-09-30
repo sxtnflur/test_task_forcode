@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "gate-nambaone"
+version = "0.0.01"
+description = ""
+authors = []
+# The service is run from sources, not installed as a package
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+# Local implementations of the internal GitLab libraries (see libs/README.md)
+utils = { path = "libs/utils", develop = true }
+gate_lib = { path = "libs/gate_lib", develop = true }
+cds_client = { path = "libs/cds_client", develop = true }
+sbank_client = { path = "libs/sbank_client", develop = true }
+fastapi = ">=0.115"
+httpx = ">=0.27,<0.28"
+structlog = ">=24.1"
+cryptography = ">=43.0"
+uvicorn = {extras = ["standard"], version = "^0.30.1"}
+respx = "^0.21.1"
+aiocache = "^0.12.2"
+elastic-apm = "^6.22.3"
+sentry-sdk = "^2.7.1"
+yarl = "^1.18.3"
+pydantic-settings = "^2.3.4"
+aiojobs = "^1.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+pre-commit = "^4.5.1"
+pytest-httpx = "^0.30.0"
+
+[build-system]
+requires = ["poetry-core>=1.8.1"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["I", "E", "F"]
+
+[tool.ruff.lint.isort]
+force-single-line = true

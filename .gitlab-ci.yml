@@ -1,0 +1,39 @@
+default:
+  tags:
+    - wb
+#    - scaleway-main - can work but very slow
+
+
+stages:
+  - linters
+  - test
+  - unit-tests
+  - build
+include:
+  - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Jobs/SAST.gitlab-ci.yml
+
+#  - project: 'devops/gitlab-templates'
+#    ref: master
+#    file: '/lib/gitlab/ci/templates/Security/check-commit.yml'
+
+  - project: 'devops/gitlab-templates'
+    ref: master
+    file: '/lib/gitlab/ci/templates2/general-templates.yaml'
+
+  - project: 'devops/gitlab-templates'
+    ref: master
+    file: '/lib/gitlab/ci/templates2/general-linters.yaml'
+
+  - project: 'devops/gitlab-templates'
+    ref: master
+    file: '/lib/gitlab/ci/templates2/general-pytest.yaml'
+
+  - project: 'devops/gitlab-templates'
+    ref: master
+    file: '/lib/gitlab/ci/templates2/general-trivy-fs.yaml'
+
+  - project: 'devops/gitlab-templates'
+    ref: master
+    file: '/lib/gitlab/ci/templates2/general-build-kaniko.yaml'
+
